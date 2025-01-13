@@ -61,6 +61,7 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
     }
 
     public static class TareaViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvNombreAsignatura;
         private final TextView tvNombreTarea;
         private final TextView tvDescripcionTarea;
         private final TextView tvFechaEntrega;
@@ -69,6 +70,7 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
 
         public TareaViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvNombreAsignatura= itemView.findViewById(R.id.tv_nombre_asignatura);
             tvNombreTarea = itemView.findViewById(R.id.tv_nombre_tarea);
             tvDescripcionTarea = itemView.findViewById(R.id.tv_descripcion_tarea);
             tvFechaEntrega = itemView.findViewById(R.id.tv_fecha_entrega);
@@ -77,6 +79,7 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
         }
 
         public void bind(Tarea tarea) {
+            tvNombreAsignatura.setText((tarea.getNombreAsignatura()));
             tvNombreTarea.setText(tarea.getNombre());
             tvDescripcionTarea.setText(tarea.getDescripcion());
             tvFechaEntrega.setText(tarea.getFechaEntrega());
