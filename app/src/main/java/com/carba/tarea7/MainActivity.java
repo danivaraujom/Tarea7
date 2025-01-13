@@ -31,16 +31,15 @@ public class MainActivity extends AppCompatActivity implements NuevaTareaDialogo
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(tareaAdapter);
 
-        // Configurar el botón flotante para agregar una nueva tarea
+        // Configurar el boton flotante para agregar una nueva tarea
         btnAgregarTarea = findViewById(R.id.agregarTarea);
-        btnAgregarTarea.setOnClickListener(v -> showNuevaTareaDialog(null)); // Pasar null para crear una nueva tarea
+        btnAgregarTarea.setOnClickListener(v -> showNuevaTareaDialog(null));
     }
 
-    // Mostrar el cuadro de diálogo para crear o editar una tarea
+    // Mostrar el cuadro de dialogo para crear o editar una tarea
     private void showNuevaTareaDialog(Tarea tarea) {
         NuevaTareaDialogoFragment nuevaTareaDialogoFragment = new NuevaTareaDialogoFragment();
         if (tarea != null) {
-            // Si la tarea no es nula, la tarea es para editar
             nuevaTareaDialogoFragment.setTarea(tarea);
         }
         nuevaTareaDialogoFragment.setOnTareaSavedListener(this);
@@ -51,13 +50,11 @@ public class MainActivity extends AppCompatActivity implements NuevaTareaDialogo
     @Override
     public void onTareaSaved(Tarea tarea, boolean isEdit) {
         if (isEdit) {
-            // Si es una edición, actualizamos la tarea
             int position = listaTareas.indexOf(tarea);
             listaTareas.set(position, tarea);
             tareaAdapter.notifyItemChanged(position);
             Toast.makeText(this, "Tarea actualizada", Toast.LENGTH_SHORT).show();
         } else {
-            // Si es una nueva tarea, la agregamos a la lista
             listaTareas.add(tarea);
             tareaAdapter.notifyItemInserted(listaTareas.size() - 1);
             recyclerView.scrollToPosition(listaTareas.size() - 1);
@@ -72,22 +69,21 @@ public class MainActivity extends AppCompatActivity implements NuevaTareaDialogo
         bottomSheetDialog.setOnOptionSelectedListener(new TareaEditarDialogo.OnBottomSheetOptionSelectedListener() {
             @Override
             public void onEditSelected(Tarea tarea) {
-                showNuevaTareaDialog(tarea); // Pasar la tarea a editar
+                showNuevaTareaDialog(tarea);
             }
 
             @Override
             public void onDeleteSelected(Tarea tarea) {
-                showDeleteConfirmationDialog(tarea, position); // Mostrar confirmación de eliminación
+                showDeleteConfirmationDialog(tarea, position);
             }
 
             @Override
             public void onCompleteSelected(Tarea tarea) {
-                tarea.setEstado(true); // Cambiar estado a completado
+                tarea.setEstado(true);
                 tareaAdapter.notifyItemChanged(position);
                 Toast.makeText(MainActivity.this, "Tarea completada", Toast.LENGTH_SHORT).show();
             }
         });
-
         bottomSheetDialog.show(getSupportFragmentManager(), "TareaBottomSheet");
     }
 
@@ -109,6 +105,5 @@ public class MainActivity extends AppCompatActivity implements NuevaTareaDialogo
 
     // Método para manejar clic largo en la tarea
     private void onTareaLongClick(Tarea tarea, int position) {
-        // Aquí se puede manejar la lógica para el clic largo si es necesario
     }
 }

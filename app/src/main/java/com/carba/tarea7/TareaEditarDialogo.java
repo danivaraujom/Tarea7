@@ -32,13 +32,9 @@ public class TareaEditarDialogo extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.editar_tarea, container, false);
-
-        // Opciones del Bottom Sheet
         LinearLayout opcionEditar = view.findViewById(R.id.opcion_editar);
         LinearLayout opcionEliminar = view.findViewById(R.id.opcion_eliminar);
         LinearLayout opcionCompletar = view.findViewById(R.id.opcion_completar);
-
-        // Configuración de los clics
         opcionEditar.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onEditSelected(tarea);

@@ -31,20 +31,17 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
     public void onBindViewHolder(@NonNull TareaViewHolder holder, int position) {
         Tarea tarea = listaTareas.get(position);
         holder.bind(tarea);
-
-        // Detectar clic simple en la tarea
         holder.itemView.setOnClickListener(v -> {
             if (clickListener != null) {
                 clickListener.onTareaClick(tarea, position);
             }
         });
 
-        // Detectar clic largo en la tarea
         holder.itemView.setOnLongClickListener(v -> {
             if (longClickListener != null) {
                 longClickListener.onTareaLongClick(tarea, position);
             }
-            return true; // Indicar que el evento fue consumido
+            return true;
         });
     }
 
